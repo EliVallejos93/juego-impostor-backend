@@ -1,0 +1,6 @@
+@juego_impostor_backend_HostAddress = http://localhost:5121
+
+GET {{juego_impostor_backend_HostAddress}}/JuegoImpostor/
+Accept: application/json
+
+###

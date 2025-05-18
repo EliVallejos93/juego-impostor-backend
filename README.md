@@ -1,1 +1,1 @@
-# JuegoImpostor
+# juego-impostor-backend
