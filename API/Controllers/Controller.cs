@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace juego_impostor_backend.API.Controllers
 {
     [ApiController]
-    [Route("juego-impostor-backend")]
+    [Route("api/juego-impostor-backend")]
     public class Controller(ILogger<Controller> logger, IMediator mediator) : ControllerBase
     {
         private readonly ILogger<Controller> _logger = logger;
@@ -18,14 +18,14 @@ namespace juego_impostor_backend.API.Controllers
         [HttpGet]
         [Route("get-categorias", Name = "GetCategorias")]
         [SwaggerOperation("Trae todas las categorias y subcategorias.")]
-        public async Task<ResponseHandler> GetCategorias(GetCategoriasCommand command)
+        public async Task<ResponseHandler> GetCategorias([FromQuery] GetCategoriasCommand command)
         {
             return ResponseHandler.BuildResponse(HttpContext, await _mediator.Send(command));
         }
 
         [HttpPost]
         [Route("set-configuracion", Name = "SetConfiguracion")]
-        [SwaggerOperation ("Configura los parámetros iniciales del juego (cantidad de impostores, jugadores, palabra secreta, etc.).")]
+        [SwaggerOperation("Configura los parámetros iniciales del juego (cantidad de impostores, jugadores, palabra secreta, etc.).")]
         public async Task<ResponseHandler> SetConfiguracion(ConfiguracionCommand command)
         {
             return ResponseHandler.BuildResponse(HttpContext, await _mediator.Send(command));

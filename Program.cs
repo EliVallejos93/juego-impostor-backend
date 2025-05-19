@@ -55,6 +55,11 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBeh
 
 var app = builder.Build();
 
+app.UseCors(builder =>
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
+
 // Registro del Middleware de Errores
 app.UseMiddleware<ExceptionMiddleware>();
 
