@@ -1,4 +1,4 @@
-﻿using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
+﻿using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
 using juego_impostor_backend.Features.Categorias.Application.Interfaces;
 
 namespace juego_impostor_backend.Shared.Persistence

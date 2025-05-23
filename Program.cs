@@ -4,10 +4,10 @@ using juego_impostor_backend.API.Middlewares;
 using juego_impostor_backend.Features.Categorias.Application.Interfaces;
 using juego_impostor_backend.Features.Categorias.Application.UseCases;
 using juego_impostor_backend.Features.Categorias.Infrastructure;
-using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
-using juego_impostor_backend.Features.ConfiguracionJuego.Application.Services;
-using juego_impostor_backend.Features.ConfiguracionJuego.Application.UseCases;
-using juego_impostor_backend.Features.ConfiguracionJuego.Infrastructure;
+using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
+using juego_impostor_backend.Features.IniciarPartida.Application.Services;
+using juego_impostor_backend.Features.IniciarPartida.Application.UseCases;
+using juego_impostor_backend.Features.IniciarPartida.Infrastructure;
 using juego_impostor_backend.Shared.Behaviors;
 using juego_impostor_backend.Shared.Persistence;
 using juego_impostor_backend.Features.Categorias.Application.Services;
@@ -40,11 +40,11 @@ builder.Services.AddScoped<IConfiguracionService, ConfiguracionService>();
 
 // Configuracion de MediatR de comandos y handlers
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCategoriasCommand).Assembly).RegisterServicesFromAssembly(typeof(GetCategoriasCommandHandler).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ConfiguracionCommand).Assembly).RegisterServicesFromAssembly(typeof(ConfiguracionCommandHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCategoriasQuery).Assembly).RegisterServicesFromAssembly(typeof(GetCategoriasQueryHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IniciarPartidaCommand).Assembly).RegisterServicesFromAssembly(typeof(IniciarPartidaCommandHandler).Assembly));
 // Configuracion de FluentValidation
 //builder.Services.AddValidatorsFromAssemblyContaining<GetCategoriasCommandValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<ConfiguracionCommandValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<IniciarPartidaCommandValidator>();
 // Configuracion de Behaviors de MediatR
 // middleware de MediatR que valida los comandos de request
 builder.Services.AddHttpContextAccessor(); // necesario para IHttpContextAccessor
@@ -64,11 +64,11 @@ app.UseCors(builder =>
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-app.UseSwagger();
-app.UseSwaggerUI();
-//}
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseRouting();
 

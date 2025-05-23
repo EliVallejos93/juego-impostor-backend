@@ -1,4 +1,4 @@
-﻿namespace juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces
+﻿namespace juego_impostor_backend.Features.IniciarPartida.Application.Interfaces
 {
     public interface IPalabraSecretaRepository
     {

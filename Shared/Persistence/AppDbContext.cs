@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using juego_impostor_backend.Features.Categorias.Domain.Entities;
-using juego_impostor_backend.Features.ConfiguracionJuego.Domain.Entities;
+using juego_impostor_backend.Features.IniciarPartida.Domain.Entities;
 
 namespace juego_impostor_backend.Shared.Persistence
 {

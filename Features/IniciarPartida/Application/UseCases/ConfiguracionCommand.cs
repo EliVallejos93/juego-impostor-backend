@@ -1,26 +1,26 @@
-﻿using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
-using juego_impostor_backend.Features.ConfiguracionJuego.Application.DTOs;
+﻿using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
+using juego_impostor_backend.Features.IniciarPartida.Application.DTOs;
 using FluentValidation;
 using MediatR;
 
-namespace juego_impostor_backend.Features.ConfiguracionJuego.Application.UseCases
+namespace juego_impostor_backend.Features.IniciarPartida.Application.UseCases
 {
     // aca usamos MediatR para implementar el patron CQRS.
-    // Tenemos el comando ConfiguracionCommand que es el comando modelo.
+    // Tenemos el comando IniciarPartidaCommand que es el comando modelo.
     // Este comando implementa la interfaz IRequest de MediatR, lo que significa que es un comando que se puede enviar a través del mediador.
     // A su vez usamos FluentValidation para validar el comando antes de que se ejecute.
     // Y luego tenemos el handler que se encarga de manejar el comando y crear el usuario en la base de datos.
 
     // Command para configurar el juego
-    public class ConfiguracionCommand : IRequest<ConfiguracionDTOResponse>
+    public class IniciarPartidaCommand : IRequest<ConfiguracionDTOResponse>
     {
         public configuracion configuracion { get; set; } = new();
     }
 
-    // Validator for ConfiguracionCommand
-    public class ConfiguracionCommandValidator : AbstractValidator<ConfiguracionCommand>
+    // Validator for IniciarPartidaCommand
+    public class IniciarPartidaCommandValidator : AbstractValidator<IniciarPartidaCommand>
     {
-        public ConfiguracionCommandValidator()
+        public IniciarPartidaCommandValidator()
         {
             RuleFor(x => x.configuracion.CantImpostores)
                 .InclusiveBetween(1, 10)
@@ -43,12 +43,12 @@ namespace juego_impostor_backend.Features.ConfiguracionJuego.Application.UseCase
         }
     }
 
-    // Handler for ConfiguracionCommand
-    public class ConfiguracionCommandHandler(IConfiguracionService configuracionService) : IRequestHandler<ConfiguracionCommand, ConfiguracionDTOResponse>
+    // Handler for IniciarPartidaCommand
+    public class IniciarPartidaCommandHandler(IConfiguracionService configuracionService) : IRequestHandler<IniciarPartidaCommand, ConfiguracionDTOResponse>
     {
         IConfiguracionService _configuracionService = configuracionService;
 
-        public async Task<ConfiguracionDTOResponse> Handle(ConfiguracionCommand request, CancellationToken cancellationToken)
+        public async Task<ConfiguracionDTOResponse> Handle(IniciarPartidaCommand request, CancellationToken cancellationToken)
         {
             // Llama al dominio para que la logica elija el o los impostores y la frase de verificacion.
             ConfiguracionDTOResponse configuracionDTOResponse = new();

@@ -1,9 +1,9 @@
-﻿using juego_impostor_backend.Features.ConfiguracionJuego.Application.DTOs;
-using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
-using juego_impostor_backend.Features.ConfiguracionJuego.Infrastructure;
+﻿using juego_impostor_backend.Features.IniciarPartida.Application.DTOs;
+using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
+using juego_impostor_backend.Features.IniciarPartida.Infrastructure;
 using juego_impostor_backend.Shared.Persistence;
 
-namespace juego_impostor_backend.Features.ConfiguracionJuego.Application.Services
+namespace juego_impostor_backend.Features.IniciarPartida.Application.Services
 {
     public class ConfiguracionService(IUnitOfWork unitOfWork) : IConfiguracionService
     {

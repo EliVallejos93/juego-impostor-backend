@@ -1,7 +1,7 @@
-﻿using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
+﻿using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
 using juego_impostor_backend.Shared.Persistence;
 
-namespace juego_impostor_backend.Features.ConfiguracionJuego.Infrastructure
+namespace juego_impostor_backend.Features.IniciarPartida.Infrastructure
 {
     public class PalabraSecretaRepository(AppDbContext context) : IPalabraSecretaRepository
     {

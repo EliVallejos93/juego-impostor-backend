@@ -6,22 +6,22 @@ using MediatR;
 namespace juego_impostor_backend.Features.Categorias.Application.UseCases
 {
     // aca usamos MediatR para implementar el patron CQRS.
-    // Tenemos el comando GetCategoriasCommand que es el comando modelo.
-    // Este comando implementa la interfaz IRequest de MediatR, lo que significa que es un comando que se puede enviar a través del mediador.
-    // A su vez usamos FluentValidation para validar el comando antes de que se ejecute.
-    // Y luego tenemos el handler que se encarga de manejar el comando y crear el usuario en la base de datos.
+    // Tenemos la query GetCategoriasQuery que es la query modelo.
+    // Esta query implementa la interfaz IRequest de MediatR, lo que significa que es una query que se puede enviar a través del mediador.
+    // no tiene validacion porque no tiene propiedades, solo se usa para indicar que queremos obtener las categorias.
+    // Y luego tenemos el handler que se encarga de manejar la query y llamar a la logica de negocio.
 
-    // Command para traer las categorias del juego
-    public class GetCategoriasCommand : IRequest<GetCategoriasDTOResponse>
+    // Query para traer las categorias del juego
+    public class GetCategoriasQuery : IRequest<GetCategoriasDTOResponse>
     {
     }
 
-    // Handler for GetCategoriasCommand
-    public class GetCategoriasCommandHandler(IGetCategoriasService getCategoriasService) : IRequestHandler<GetCategoriasCommand, GetCategoriasDTOResponse>
+    // Handler for GetCategoriasQuery
+    public class GetCategoriasQueryHandler(IGetCategoriasService getCategoriasService) : IRequestHandler<GetCategoriasQuery, GetCategoriasDTOResponse>
     {
         IGetCategoriasService _getCategoriasService = getCategoriasService;
 
-        public async Task<GetCategoriasDTOResponse> Handle(GetCategoriasCommand request, CancellationToken cancellationToken)
+        public async Task<GetCategoriasDTOResponse> Handle(GetCategoriasQuery request, CancellationToken cancellationToken)
         {
             // Llama al servicio para que la logica vaya a buscar todas las categorias.
             GetCategoriasDTOResponse getCategoriasDTOResponse = new();

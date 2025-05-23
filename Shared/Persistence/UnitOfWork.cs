@@ -1,5 +1,5 @@
-﻿using juego_impostor_backend.Features.ConfiguracionJuego.Application.Interfaces;
-using juego_impostor_backend.Features.ConfiguracionJuego.Infrastructure;
+﻿using juego_impostor_backend.Features.IniciarPartida.Application.Interfaces;
+using juego_impostor_backend.Features.IniciarPartida.Infrastructure;
 using juego_impostor_backend.Features.Categorias.Application.Interfaces;
 using juego_impostor_backend.Features.Categorias.Infrastructure;
 using System;

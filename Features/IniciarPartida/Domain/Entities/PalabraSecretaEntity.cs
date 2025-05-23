@@ -1,4 +1,4 @@
-﻿namespace juego_impostor_backend.Features.ConfiguracionJuego.Domain.Entities
+﻿namespace juego_impostor_backend.Features.IniciarPartida.Domain.Entities
 {
     public class PalabraSecretaEntity
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace juego_impostor_backend.Features.ConfiguracionJuego.Application.DTOs
+namespace juego_impostor_backend.Features.IniciarPartida.Application.DTOs
 {
     public class configuracion
     {
