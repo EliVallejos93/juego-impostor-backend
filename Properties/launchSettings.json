@@ -9,7 +9,7 @@
         "ConnectionStrings": "Server=localhost;Database=OnionAppDb;Trusted_Connection=True;"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:5001"
+      "applicationUrl": "https://localhost:5000"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
