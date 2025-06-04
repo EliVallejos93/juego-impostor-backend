@@ -32,20 +32,7 @@
 #WORKDIR /app
 ##COPY --from=publish /app/publish .
 ##ENTRYPOINT ["dotnet", "juego-impostor-backend.dll"]
-#
-#
-#
-#
-#
-#
-## Configuracion para migracion de db
-## ✅ Instalar dotnet-ef CLI globalmente
-#RUN dotnet tool install --global dotnet-ef
-## ✅ Exportar correctamente el PATH para herramientas globales
-#ENV PATH="$PATH:/root/.dotnet/tools"
-#COPY --from=publish /app/publish .
-## ✅ Ejecutar migración usando shell para que PATH se respete
-#CMD ["/bin/bash", "-c", "dotnet ef database update"]
+
 
 
 
@@ -74,12 +61,21 @@ COPY . .
 RUN dotnet build -c Release -o out
 RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
+
+
+# Dentro de FROM build AS build o FROM publish AS publish (mejor aquí):
+RUN dotnet tool install --global dotnet-ef \
+    && export PATH="$PATH:/root/.dotnet/tools" \
+    && dotnet ef database update --project juego-impostor-backend.csproj
+
+
+
 # Imagen final
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS final
 WORKDIR /app
 
 # ✅ Instalar dotnet-ef y asegurar el PATH
-RUN dotnet tool install --global dotnet-ef
+#RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Copiar publicación y script de entrada
