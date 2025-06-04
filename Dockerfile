@@ -62,6 +62,7 @@ RUN dotnet build -c Release -o out
 RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
 
+ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Dentro de FROM build AS build o FROM publish AS publish (mejor aquí):
 RUN dotnet tool install --global dotnet-ef \
@@ -76,7 +77,7 @@ WORKDIR /app
 
 # ✅ Instalar dotnet-ef y asegurar el PATH
 #RUN dotnet tool install --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
+#ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Copiar publicación y script de entrada
 COPY --from=build /app/publish .
