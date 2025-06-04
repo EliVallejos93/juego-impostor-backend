@@ -39,9 +39,10 @@ WORKDIR /app
 
 
 # Configuracion para migracion de db
-# ⬇️ Instalar dotnet-ef CLI
+# ✅ Instalar dotnet-ef CLI globalmente
 RUN dotnet tool install --global dotnet-ef
-ENV PATH="${PATH}:/root/.dotnet/tools"
+# ✅ Exportar correctamente el PATH para herramientas globales
+ENV PATH="$PATH:/root/.dotnet/tools"
 COPY --from=publish /app/publish .
-# Ejecuta migraciones
-ENTRYPOINT ["dotnet", "ef", "database", "update"]
+# ✅ Ejecutar migración usando shell para que PATH se respete
+CMD ["/bin/bash", "-c", "dotnet ef database update"]
