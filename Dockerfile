@@ -49,39 +49,36 @@
 
 
 
+# Etapa de construcción
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copiar csproj y restaurar
+# Copiar csproj y restaurar paquetes
 COPY ["juego-impostor-backend.csproj", "."]
 RUN dotnet restore
 
-# Copiar todo y compilar
+# Copiar todo y compilar + publicar
 COPY . .
 RUN dotnet build -c Release -o out
 RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
-
+# Instalar dotnet-ef y ejecutar migraciones
+RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
-
-# Dentro de FROM build AS build o FROM publish AS publish (mejor aquí):
-RUN dotnet tool install --global dotnet-ef \
-    && export PATH="$PATH:/root/.dotnet/tools" \
-    && dotnet ef database update --project juego-impostor-backend.csproj
+RUN dotnet ef database update --project juego-impostor-backend.csproj
 
 
-
-# Imagen final
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS final
+# Etapa final (runtime solo para producción)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-# ✅ Instalar dotnet-ef y asegurar el PATH
-#RUN dotnet tool install --global dotnet-ef
-#ENV PATH="$PATH:/root/.dotnet/tools"
-
-# Copiar publicación y script de entrada
-COPY --from=build /app/publish .
+# Copiar archivos publicados y script de entrada
+COPY --from=build /app/publish ./
 COPY entrypoint.sh .
 
-# ✅ Hacer que se ejecute el script
+# Hacer ejecutable el script (por si acaso)
+RUN chmod +x entrypoint.sh
+
+# Ejecutar el script
 ENTRYPOINT ["bash", "entrypoint.sh"]
+
