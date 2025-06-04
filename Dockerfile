@@ -30,13 +30,18 @@ RUN dotnet publish "./juego-impostor-backend.csproj" -c $BUILD_CONFIGURATION -o 
 # Esta fase se usa en producción o cuando se ejecuta desde VS en modo normal (valor predeterminado cuando no se usa la configuración de depuración)
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+#COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet", "juego-impostor-backend.dll"]
 
 
 
 
+
+
 # Configuracion para migracion de db
+# ⬇️ Instalar dotnet-ef CLI
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
+COPY --from=publish /app/publish .
+# Ejecuta migraciones
 ENTRYPOINT ["dotnet", "ef", "database", "update"]
