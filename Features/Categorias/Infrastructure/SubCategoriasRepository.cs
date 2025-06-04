@@ -20,14 +20,14 @@ namespace juego_impostor_backend.Features.Categorias.Infrastructure
 
         public readonly List<SubCategoriaEntity> Todas = new()
     {
-            new SubCategoriaEntity() { Id = 1, IdCategoria = 1, SubCategoria = "Acciones" },
-            new SubCategoriaEntity() { Id = 2, IdCategoria = 1, SubCategoria = "Animales" },
+            //new SubCategoriaEntity() { Id = 1, IdCategoria = 1, SubCategoria = "Acciones" },
+            //new SubCategoriaEntity() { Id = 2, IdCategoria = 1, SubCategoria = "Animales" },
 
-            new SubCategoriaEntity() { Id = 3, IdCategoria = 2, SubCategoria = "Harry Potter" },
-            new SubCategoriaEntity() { Id = 4, IdCategoria = 2, SubCategoria = "Marvel" },
+            //new SubCategoriaEntity() { Id = 3, IdCategoria = 2, SubCategoria = "Harry Potter" },
+            //new SubCategoriaEntity() { Id = 4, IdCategoria = 2, SubCategoria = "Marvel" },
 
-            new SubCategoriaEntity() { Id = 5, IdCategoria = 3, SubCategoria = "Futbol" },
-            new SubCategoriaEntity() { Id = 6, IdCategoria = 3, SubCategoria = "Tenis" },
+            //new SubCategoriaEntity() { Id = 5, IdCategoria = 3, SubCategoria = "Futbol" },
+            //new SubCategoriaEntity() { Id = 6, IdCategoria = 3, SubCategoria = "Tenis" },
     };
     }
 }

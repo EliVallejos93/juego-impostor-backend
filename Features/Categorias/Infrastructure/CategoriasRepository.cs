@@ -20,9 +20,9 @@ namespace juego_impostor_backend.Features.Categorias.Infrastructure
 
         public readonly List<CategoriaEntity> Todas = new()
     {
-            new CategoriaEntity() { Id = 1, Categoria = "General" },
-            new CategoriaEntity() { Id = 2, Categoria = "Cine" },
-            new CategoriaEntity() { Id = 3, Categoria = "Deporte" },
+            //new CategoriaEntity() { Id = 1, Categoria = "General" },
+            //new CategoriaEntity() { Id = 2, Categoria = "Cine" },
+            //new CategoriaEntity() { Id = 3, Categoria = "Deporte" },
     };
     }
 }

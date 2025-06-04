@@ -27,4 +27,5 @@ RUN dotnet publish "./juego-impostor-backend.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "juego-impostor-backend.dll"]
+#ENTRYPOINT ["dotnet", "juego-impostor-backend.dll"]
+ENTRYPOINT ["dotnet", "ef", "database", "update"]

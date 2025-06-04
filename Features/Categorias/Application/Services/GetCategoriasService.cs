@@ -3,6 +3,7 @@ using juego_impostor_backend.Features.Categorias.Application.Interfaces;
 using juego_impostor_backend.Features.Categorias.Domain.Entities;
 using juego_impostor_backend.Features.Categorias.Infrastructure;
 using juego_impostor_backend.Shared.Persistence;
+using System.Numerics;
 
 namespace juego_impostor_backend.Features.Categorias.Application.Services
 {
@@ -22,7 +23,7 @@ namespace juego_impostor_backend.Features.Categorias.Application.Services
                 {
                     Id = categoria.Id,
                     Categoria = categoria.Categoria,
-                    SubCategorias = subCategoriasTodas.Where(x => x.IdCategoria == categoria.Id).ToList()
+                    SubCategorias = subCategoriasTodas.Where(x => x.IdCategoria == new BigInteger(categoria.Id.ToByteArray())).ToList()
                 });
             }
 

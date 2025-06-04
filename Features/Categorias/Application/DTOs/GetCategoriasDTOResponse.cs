@@ -9,8 +9,7 @@ namespace juego_impostor_backend.Features.Categorias.Application.DTOs
 
     public class CategoriaDTO
     {
-        //public CategoriaEntity Categoria { get; set; } = new CategoriaEntity();
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Categoria { get; set; } = null!;
         public List<SubCategoriaEntity> SubCategorias { get; set; } = new List<SubCategoriaEntity>();
     }

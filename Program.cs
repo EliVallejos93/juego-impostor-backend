@@ -25,7 +25,7 @@ builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); }); // Habilitar an
 
 // Configuracion ConnectionStrings, DbContext, UnitOfWork y Repositories
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>();
 builder.Services.AddScoped<ISubCategoriasRepository, SubCategoriasRepository>();
