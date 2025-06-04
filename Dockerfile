@@ -49,7 +49,6 @@
 
 
 
-# Etapa de construcción
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
@@ -57,28 +56,33 @@ WORKDIR /app
 COPY ["juego-impostor-backend.csproj", "."]
 RUN dotnet restore
 
-# Copiar todo y compilar + publicar
+# Copiar todo el código
 COPY . .
-RUN dotnet build -c Release -o out
-RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
-# Instalar dotnet-ef y ejecutar migraciones
+# Instalar dotnet-ef global
 RUN dotnet tool install --global dotnet-ef
+
+# Asegurar que esté en el PATH
 ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Ejecutar dotnet tool restore (aunque innecesario en global, algunos entornos lo requieren)
+RUN dotnet tool restore || echo "Tool restore fallback..."
+
+# Ejecutar migración
 RUN dotnet ef database update --project juego-impostor-backend.csproj
 
+# Publicar
+RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
-# Etapa final (runtime solo para producción)
+
+
+# Imagen final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
-# Copiar archivos publicados y script de entrada
-COPY --from=build /app/publish ./
+COPY --from=build /app/publish .
 COPY entrypoint.sh .
 
-# Hacer ejecutable el script (por si acaso)
-RUN chmod +x entrypoint.sh
-
-# Ejecutar el script
 ENTRYPOINT ["bash", "entrypoint.sh"]
+
 
