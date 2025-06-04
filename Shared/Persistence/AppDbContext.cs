@@ -16,5 +16,9 @@ namespace juego_impostor_backend.Shared.Persistence
             // Configuración de entidades si usás Fluent API
             base.OnModelCreating(modelBuilder);
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("DefaultConnection");
+        }
     }
 }
