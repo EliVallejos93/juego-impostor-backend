@@ -8,6 +8,7 @@ namespace juego_impostor_backend.Shared.Persistence
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options) { }
+        private IConfiguration _config { get; set; }
         public DbSet<CategoriaEntity> Categorias => Set<CategoriaEntity>();
         public DbSet<SubCategoriaEntity> SubCategorias => Set<SubCategoriaEntity>();
         public DbSet<PalabraSecretaEntity> PalabrasSecretas => Set<PalabraSecretaEntity>();
@@ -18,7 +19,7 @@ namespace juego_impostor_backend.Shared.Persistence
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("DefaultConnection");
+            optionsBuilder.UseNpgsql(_config.GetConnectionString("DefaultConnection"));
         }
     }
 }
